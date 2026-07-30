@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Go-toubun no Hanayome",
+    "type": "manga",
+    "genres": [
+      "romance",
+      "comedy"
+    ],
+    "mood": "cozy"
+  },
+  {
+    "title": "One Piece",
+    "type": "manga",
+    "genres": [
+      "action",
+      "comedy",
+      "fantasy"
+    ],
+    "mood": "fun"
+  },
+  {
+    "title": "bleach",
+    "type": "manga",
+    "genres": [
+      "action",
+      "adventure",
+      "supernatural"
+    ],
+    "mood": "emotional",
+    "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx30012-1epmVfTSv2rr.png"
+  },
+  {
+    "title": "vinland saga",
+    "type": "manga",
+    "genres": [
+      "action",
+      "adventure",
+      "drama"
+    ],
+    "mood": "intense",
+    "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx30642-0mjRDkf4THpo.jpg"
+  }
+]

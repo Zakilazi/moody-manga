@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manga Recommender</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+  <filter id="pen-roughen">
+    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="4"/>
+  </filter>
+  </svg>
+  <div class="page-layout">
+
+    <aside class="side-panel notes-panel">
+      <h2>Notes</h2>
+      <p class="fun-fact">💡 Fun fact: "Manga" literally means "whimsical pictures" in Japanese.</p>
+      <p class="fun-fact">Click a title's panel to see more details (coming soon).</p>
+    </aside>
+
+    <main class="manga-panel">
+      <h1>Find Your Next Manga</h1>
+     <div class="add-manga-form">
+       <input type="text" id="newTitle" placeholder="Manga title">
+       <select id="newMood">
+         <option value="intense">Intense</option>
+         <option value="emotional">Emotional</option>
+         <option value="fun">Fun</option>
+         <option value="cozy">Cozy</option>
+       </select>
+       <button onclick="addManga()">Add Manga</button>
+       <p id="addStatus"></p>
+    </div>
+     <div class="search-bar">
+       <input type="text" id="searchInput" placeholder="Search by title...">
+     </div>
+      <div class="filters">
+        <div class="filter-group">
+          <p>Genre:</p>
+          <button onclick="setGenre('action', this)">Action</button>
+          <button onclick="setGenre('romance', this)">Romance</button>
+          <button onclick="setGenre('comedy', this)">Comedy</button>
+          <button onclick="setGenre('drama', this)">Drama</button>
+          <button onclick="setGenre('fantasy', this)">Fantasy</button>
+          <button onclick="setGenre('thriller', this)">Thriller</button>
+          <button onclick="setGenre('horror', this)">Horror</button>
+          <button onclick="setGenre('family', this)">Family</button>
+        </div>
+
+        <div class="filter-group">
+          <p>Mood:</p>
+          <button onclick="setMood('intense', this)">Intense</button>
+          <button onclick="setMood('emotional', this)">Emotional</button>
+          <button onclick="setMood('fun', this)">Fun</button>
+          <button onclick="setMood('cozy', this)">Cozy</button>
+          <button onclick="setMood('crazy', this)">Crazy</button>
+          <button onclick="setMood('mad', this)">Mad</button>
+          <button onclick="setMood('board', this)">Board</button>
+          <button onclick="setMood('artistcal', this)">Artixtcal</button>
+          <button onclick="setMood('hungry', this)">Hungry</button>
+          <button onclick="setMood('sad', this)">Sad</button>
+          <button onclick="setMood('happy', this)">Happy</button>
+          <button onclick="setMood('thurst for scince', this)">Thurst For Scince</button>
+        </div>
+      </div>
+
+      <div id="results" class="panel-grid"></div>
+    </main>
+
+    <aside class="side-panel nav-panel">
+      <h2>Navigate</h2>
+      <button class="nav-btn">Home</button>
+      <button class="nav-btn">Browse All</button>
+      <button class="nav-btn">About</button>
+    </aside>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</body>
+</html>
