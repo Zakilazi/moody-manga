@@ -108,10 +108,11 @@ function displayResults(items) {
     return;
   }
 
-  items.forEach(item => {
+  items.forEach((item,index) => {
     const panel = document.createElement('div');
     panel.className = 'panel'
-    panel.innerHTML = `
+    panel.innerHTML =  `
+      <p class="page-number">Page ${index + 1} of ${items.length}</p>
       <img class="cover" alt="${item.title} cover">
       <h3>${item.title}</h3>
       <p><strong>Type:</strong> ${item.type}</p>

@@ -1,3 +1,11 @@
+.page-number {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
 .page-layout {
   display: grid;
   grid-template-columns: 200px minmax(500px, 700px) 200px;
@@ -127,24 +135,30 @@ h1 {
 }
 
 .panel-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   margin-top: 30px;
 }
 
 .panel {
-  border: 4px solid #f2f2f2;
-  padding: 15px;
+  min-height:85vh;
+  border: 3px solid #f2f2f2;
+  padding: 30px;
   background: #1a1a1a;
+  backgroun-image: radial-gradient(circle, #333 1px, transparent 1px);
+  background-size: 10px 10px;
   text-align: left;
-  box-shadow: 6px 6px 0px rgba(255,255,255,0.15);
-  color: #f2f2f2;
+  box-shadow: 8px 8px 0px rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .panel h3 {
+  font-size: 1.8rem;
   border-bottom: 2px solid #f2f2f2;
-  padding-bottom: 5px;
+  padding-bottom: 8px;
   margin-top: 0;
 }
 .sfx-text {
@@ -161,7 +175,7 @@ h1 {
 }
 .panel .cover {
   width: 100%;
-  height: 180px;
+  max-height: 45vh;
   object-fit: cover;
   border: 2px solid #f2f2f2;
   margin-bottom: 10px;
