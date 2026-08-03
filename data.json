@@ -74,5 +74,40 @@
     ],
     "mood": "grim",
     "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx30002-Cul4OeN7bYtn.jpg"
+  },
+  {
+    "title": "haikyu!",
+    "type": "manga",
+    "genres": [
+      "comedy",
+      "drama",
+      "sports"
+    ],
+    "mood": "epic",
+    "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx65243-mR4MnJFmfaOF.png"
+  },
+  {
+    "title": "chainsaw man",
+    "type": "manga",
+    "genres": [
+      "action",
+      "comedy",
+      "drama",
+      "horror",
+      "supernatural"
+    ],
+    "mood": "grim",
+    "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx105778-euxXZEIfDY2u.png"
+  },
+  {
+    "title": "blue lock",
+    "type": "manga",
+    "genres": [
+      "action",
+      "drama",
+      "sports"
+    ],
+    "mood": "intense",
+    "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx106130-yPNeuSu75ey1.jpg"
   }
 ]

@@ -88,7 +88,7 @@
   color: #0d0d0d;
 }
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'kalam', cursive;
   background-color: #0d0d0d;
   background-image: radial-gradient(circle, #333 1px, transparent 1px);
   background-size: 12px 12px;
@@ -98,6 +98,7 @@ body {
 }
 
 h1 {
+  font-family: 'permanent marker', cursive;
   text-transform: uppercase;
   letter-spacing: 2px;
   border-bottom: 4px solid #f2f2f2;
@@ -146,7 +147,7 @@ h1 {
   border: 3px solid #f2f2f2;
   padding: 30px;
   background: #1a1a1a;
-  backgroun-image: radial-gradient(circle, #333 1px, transparent 1px);
+  background-image: radial-gradient(circle, #333 1px, transparent 1px);
   background-size: 10px 10px;
   text-align: left;
   box-shadow: 8px 8px 0px rgba(255,255,255,0.15);
@@ -156,6 +157,7 @@ h1 {
 }
 
 .panel h3 {
+  font-family: 'permanent marker', cursive;
   font-size: 1.8rem;
   border-bottom: 2px solid #f2f2f2;
   padding-bottom: 8px;
@@ -180,4 +182,43 @@ h1 {
   border: 2px solid #f2f2f2;
   margin-bottom: 10px;
   background: #0d0d0d;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.pagination button {
+  background-color: #1a1a1a;
+  color: #f2f2f2;
+  border: 2px solid #f2f2f2;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  font-family: 'Kalam', cursive;
+}
+
+.pagination button:hover {
+  background-color: #f2f2f2;
+  color: #0d0d0d;
+}
+
+.pagination span {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination button:disabled:hover {
+  background-color: #1a1a1a;
+  color: #f2f2f2;
 }

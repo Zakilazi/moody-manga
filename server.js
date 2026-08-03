@@ -68,8 +68,7 @@ app.get('/', (req, res) => {
 });
 app.get('/recommendations', (req, res) => {
   const items = loadItems();
-  const { genre, mood, search } = req.query;
-
+  const { genre, mood, search, page } = req.query;
   let results = items;
 
   if (genre) {
@@ -83,7 +82,13 @@ app.get('/recommendations', (req, res) => {
     const term = search.toLowerCase();
     results = results.filter(item => item.title.toLowerCase().includes(term));
   }
-  res.json(results);
+  const currentPage = parseInt(page) || 1;
+  const pageSize = 10;
+  const totalresults = results.length;
+  const totalPages = Math.ceil(results.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedResults = results.slice(startIndex, startIndex + pageSize);
+  res.json({ results: paginatedResults, totalresults, totalPages, currentPage });
 });
 
 app.post('/add-manga', async (req, res) => {

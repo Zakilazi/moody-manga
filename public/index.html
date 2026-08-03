@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
   <title>Manga Recommender</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  </head>
 <body>
   <svg width="0" height="0" style="position:absolute">
   <filter id="pen-roughen">
@@ -25,28 +25,27 @@
       <h1>Find Your Next Manga</h1>
      <div class="add-manga-form">
        <input type="text" id="newTitle" placeholder="Manga title">
-       <select id="newMood">
-         <option value="intense">Intense</option>
-         <option value="emotional">Emotional</option>
-         <option value="grim">Grim</option>
-         <option value="bittersweet">Bittersweet</option>
-         <option value="eerie">Eerie</option>
-         <option value="epic">Epic</option>
-         <option value="wholesome">Wholesome</option>
-         <option value="melancholic">Melancholic</option>
-         <option value="fun">Fun</option>
-         <option value="cozy">Cozy</option>
-         <option value="crazy">Crazy</option>
-         <option value="mad">Mad</option>
-         <option value="lonly">Lonly</option>
-         <option value="sad">Sad</option>
-         <option value="artistcal">Artistcal</option>
-         <option value="board">Board</option>
-         <option value="happy">Happy</option>
-         <option value="thurst for scince">Fhurst For Scince</option>
-         <option value="hungry">Hungry</option>
-
-       </select>
+     <select id="newMood">
+  <option value="intense">Intense</option>
+  <option value="emotional">Emotional</option>
+  <option value="fun">Fun</option>
+  <option value="cozy">Cozy</option>
+  <option value="grim">Grim</option>
+  <option value="bittersweet">Bittersweet</option>
+  <option value="eerie">Eerie</option>
+  <option value="epic">Epic</option>
+  <option value="wholesome">Wholesome</option>
+  <option value="melancholic">Melancholic</option>
+  <option value="suspenseful">Suspenseful</option>
+  <option value="uplifting">Uplifting</option>
+  <option value="chaotic">Chaotic</option>
+  <option value="tense">Tense</option>
+  <option value="calm">Calm</option>
+  <option value="nostalgic">Nostalgic</option>
+  <option value="mysterious">Mysterious</option>
+  <option value="heartwarming">Heartwarming</option>
+  <option value="dreamy">Dreamy</option>
+</select>
        <button onclick="addManga()">Add Manga</button>
        <p id="addStatus"></p>
     </div>
@@ -55,42 +54,53 @@
      </div>
       <div class="filters">
         <div class="filter-group">
-          <p>Genre:</p>
-          <button onclick="setGenre('action', this)">Action</button>
-          <button onclick="setGenre('romance', this)">Romance</button>
-          <button onclick="setGenre('comedy', this)">Comedy</button>
-          <button onclick="setGenre('drama', this)">Drama</button>
-          <button onclick="setGenre('fantasy', this)">Fantasy</button>
-          <button onclick="setGenre('thriller', this)">Thriller</button>
-          <button onclick="setGenre('horror', this)">Horror</button>
-          <button onclick="setGenre('family', this)">Family</button>
-        </div>
+  <p>Genre:</p>
+  <button onclick="setGenre('action', this)">Action</button>
+  <button onclick="setGenre('romance', this)">Romance</button>
+  <button onclick="setGenre('comedy', this)">Comedy</button>
+  <button onclick="setGenre('drama', this)">Drama</button>
+  <button onclick="setGenre('fantasy', this)">Fantasy</button>
+  <button onclick="setGenre('thriller', this)">Thriller</button>
+  <button onclick="setGenre('horror', this)">Horror</button>
+  <button onclick="setGenre('family', this)">Family</button>
+  <button onclick="setGenre('mystery', this)">Mystery</button>
+  <button onclick="setGenre('sci-fi', this)">Sci-Fi</button>
+  <button onclick="setGenre('supernatural', this)">Supernatural</button>
+  <button onclick="setGenre('psychological', this)">Psychological</button>
+  <button onclick="setGenre('sports', this)">Sports</button>
+  <button onclick="setGenre('adventure', this)">Adventure</button>
+  <button onclick="setGenre('slice of life', this)">Slice of Life</button>
+</div>
 
         <div class="filter-group">
-          <p>Mood:</p>
-          <button onclick="setMood('intense', this)">Intense</button>
-          <button onclick="setMood('emotional', this)">Emotional</button>
-          <button onclick="setMood('fun', this)">Fun</button>
-          <button onclick="setMood('cozy', this)">Cozy</button>
-          <button onclick="setMood('crazy', this)">Crazy</button>
-          <button onclick="setMood('mad', this)">Mad</button>
-          <button onclick="setMood('board', this)">Board</button>
-          <button onclick="setMood('artistcal', this)">Artixtcal</button>
-          <button onclick="setMood('hungry', this)">Hungry</button>
-          <button onclick="setMood('sad', this)">Sad</button>
-          <button onclick="setMood('happy', this)">Happy</button>
-          <button onclick="setMood('thurst for scince', this)">Thurst For Scince</button>
-          <button onclick="setMood('grim', this)">Grim</button>
-          <button onclick="setMood('bittersweet', this)">Bittersweet</button>
-          <button onclick="setMood('eerie', this)">Eerie</button>
-          <button onclick="setMood('epic', this)">Epic</button>
-          <button onclick="setMood('wholesome', this)">Wholesome</button>
-          <button onclick="setMood('melancholic', this)">Melancholic</button>
-        </div>
+  <p>Mood:</p>
+  <button onclick="setMood('intense', this)">Intense</button>
+  <button onclick="setMood('emotional', this)">Emotional</button>
+  <button onclick="setMood('fun', this)">Fun</button>
+  <button onclick="setMood('cozy', this)">Cozy</button>
+  <button onclick="setMood('grim', this)">Grim</button>
+  <button onclick="setMood('bittersweet', this)">Bittersweet</button>
+  <button onclick="setMood('eerie', this)">Eerie</button>
+  <button onclick="setMood('epic', this)">Epic</button>
+  <button onclick="setMood('wholesome', this)">Wholesome</button>
+  <button onclick="setMood('melancholic', this)">Melancholic</button>
+  <button onclick="setMood('suspenseful', this)">Suspenseful</button>
+  <button onclick="setMood('uplifting', this)">Uplifting</button>
+  <button onclick="setMood('chaotic', this)">Chaotic</button>
+  <button onclick="setMood('tense', this)">Tense</button>
+  <button onclick="setMood('calm', this)">Calm</button>
+  <button onclick="setMood('nostalgic', this)">Nostalgic</button>
+  <button onclick="setMood('mysterious', this)">Mysterious</button>
+  <button onclick="setMood('heartwarming', this)">Heartwarming</button>
+  <button onclick="setMood('dreamy', this)">Dreamy</button>
+</div>
       </div>
 
       <div id="results" class="panel-grid"></div>
-    </main>
+<div class="pagination">
+  <button id="prevPage" onclick="changePage(-1)">Previous</button>
+  <span id="pageInfo"></span>
+  <button id="nextPage" onclick="changePage(1)">Next</button></div>
 
     <aside class="side-panel nav-panel">
       <h2>Navigate</h2>
@@ -103,5 +113,5 @@
 
   <script src="script.js"></script>
 </body>
-</body>
+
 </html>

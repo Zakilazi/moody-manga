@@ -1,7 +1,8 @@
 let currentGenre = null;
 let currentMood = null;
 let currentSearch = '';
-
+const sfxWords = ['ドン', 'バン', 'ゴゴゴ', 'ドキドキ', 'キラ', 'ズキューン', 'シーン', 'ビリビリ', 'ドサッ', 'ガーン'];
+let currentPageNum = 1;
 function addManga() {
   const title = document.getElementById('newTitle').value;
   const mood = document.getElementById('newMood').value;
@@ -34,7 +35,6 @@ function addManga() {
     });
 }
 
-const sfxWords = ['ドン', 'バン', 'ゴゴゴ', 'ドキドキ', 'キラ', 'ズキューン', 'シーン', 'ビリビリ', 'ドサッ', 'ガーン'];
 document.getElementById('searchInput').addEventListener('input', (e) => {
   currentSearch = e.target.value;
   fetchResults();
@@ -58,15 +58,25 @@ function showSFX(button) {
 }
 
 function setGenre(genre, button) {
-  currentGenre = genre;
-  highlightSelected('genre', button);
+ if ( currentGenre === genre) {
+    currentGenre = null;
+    button.classList.remove('active');
+  } else {
+    currentGenre = genre;
+    highlightSelected('genre', button);
+  }
   showSFX(button);
   fetchResults();
 }
 
 function setMood(mood, button) {
-  currentMood = mood;
-  highlightSelected('mood', button);
+  if (currentMood === mood) {
+    currentMood = null;
+    button.classList.remove('active');
+  } else {
+    currentMood = mood;
+    highlightSelected('mood', button);
+  }
   showSFX(button);
   fetchResults();
 }
@@ -80,23 +90,26 @@ function highlightSelected(type, clickedButton) {
 }
 
 function fetchResults() {
-  let url = '/recommendations?';
+  let url = `/recommendations?page=${currentPageNum}&`;
 
   if (currentGenre) {
     url += `genre=${currentGenre}&`;
   }
 
   if (currentMood) {
-    url += `mood=${currentMood}`;
+    url += `mood=${currentMood}&`;
   }
 
-if (currentSearch) {
+  if (currentSearch) {
     url += `search=${encodeURIComponent(currentSearch)}`;
   }
 
   fetch(url)
     .then(response => response.json())
-    .then(data => displayResults(data));
+    .then(data => {
+      displayResults(data.results);
+      displayPagination(data.currentPage, data.totalPages);
+    });
 }
 
 function displayResults(items) {
@@ -108,25 +121,37 @@ function displayResults(items) {
     return;
   }
 
-  items.forEach((item,index) => {
-    const panel = document.createElement('div');
-    panel.className = 'panel'
-    panel.innerHTML =  `
-      <p class="page-number">Page ${index + 1} of ${items.length}</p>
-      <img class="cover" alt="${item.title} cover">
-      <h3>${item.title}</h3>
-      <p><strong>Type:</strong> ${item.type}</p>
-      <p><strong>Genres:</strong> ${item.genres.join(', ')}</p>
-      <p><strong>Mood:</strong> ${item.mood}</p>
-    `;
-    resultsDiv.appendChild(panel);
-    
-    fetch(`/cover?title=${encodeURIComponent(item.title)}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.url) {
-          panel.querySelector('.cover').src = data.url;
-        }
-      });
-  });
+  items.forEach((item, index) => {
+  const panel = document.createElement('div');
+  panel.className = 'panel';
+  panel.innerHTML = `
+    <img class="cover" alt="${item.title} cover">
+    <h3>${item.title}</h3>
+    <p><strong>Type:</strong> ${item.type}</p>
+    <p><strong>Genres:</strong> ${item.genres.join(', ')}</p>
+    <p><strong>Mood:</strong> ${item.mood}</p>
+  `;
+  resultsDiv.appendChild(panel);
+
+  fetch(`/cover?title=${encodeURIComponent(item.title)}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.url) {
+        panel.querySelector('.cover').src = data.url;
+      }
+    });
+});
+}
+function changePage(direction){
+  currentPageNum += direction;
+  fetchResults();
+}
+function displayPagination(current, total) {
+  document.getElementById('pageInfo').textContent = `Page ${current} of ${total}`;
+
+  const prevBtn = document.getElementById('prevPage');
+  const nextBtn = document.getElementById('nextPage');
+
+  prevBtn.disabled = current <= 1;
+  nextBtn.disabled = current >= total;
 }
