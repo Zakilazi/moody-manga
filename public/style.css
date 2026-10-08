@@ -141,8 +141,24 @@ h1 {
   gap: 40px;
   margin-top: 30px;
 }
+.panel:hover {
+  box-shadow: 10px 10px 0px rgba(255,255,255,0.25);
+}
+
+.notes-panel {
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.notes-panel h3 {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.1rem;
+  margin-top: 0;
+}
 
 .panel {
+  cursor: pointer;
   min-height:85vh;
   border: 3px solid #f2f2f2;
   padding: 30px;
@@ -222,3 +238,30 @@ h1 {
   background-color: #1a1a1a;
   color: #f2f2f2;
 }
+.random-wrap {
+  margin: 20px 0;
+}
+
+.random-btn {
+  background-color: #f2f2f2;
+  color: #0d0d0d;
+  border: 3px solid #f2f2f2;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: 'Permanent Marker', cursive;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 5px 5px 0px rgba(255,255,255,0.2);
+  transition: transform 0.1s;
+}
+
+.random-btn:hover {
+  transform: translate(-2px, -2px);
+}
+
+.random-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px rgba(255,255,255,0.2);
+}
+

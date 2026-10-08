@@ -16,10 +16,12 @@
   <div class="page-layout">
 
     <aside class="side-panel notes-panel">
-      <h2>Notes</h2>
-      <p class="fun-fact">💡 Fun fact: "Manga" literally means "whimsical pictures" in Japanese.</p>
-      <p class="fun-fact">Click a title's panel to see more details (coming soon).</p>
-    </aside>
+  <h2>Notes</h2>
+  <div id="notesContent">
+    <p class="fun-fact">💡 Fun fact: "Manga" literally means "whimsical pictures" in Japanese.</p>
+    <p class="fun-fact">Click any manga to see its details here.</p>
+  </div>
+</aside>
 
     <main class="manga-panel">
       <h1>Find Your Next Manga</h1>
@@ -95,7 +97,9 @@
   <button onclick="setMood('dreamy', this)">Dreamy</button>
 </div>
       </div>
-
+<div class="random-wrap">
+  <button class="random-btn" onclick="getRandom()">🎲 Surprise me</button>
+</div>
       <div id="results" class="panel-grid"></div>
 <div class="pagination">
   <button id="prevPage" onclick="changePage(-1)">Previous</button>

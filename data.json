@@ -109,5 +109,31 @@
     ],
     "mood": "intense",
     "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx106130-yPNeuSu75ey1.jpg"
+  },
+  {
+    "title": "jojo part 7",
+    "type": "manga",
+    "genres": [
+      "action",
+      "adventure",
+      "drama",
+      "mystery",
+      "supernatural"
+    ],
+    "mood": "tense",
+    "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx31706-lRncu9VbcBB7.png"
+  },
+  {
+    "title": "beck",
+    "type": "manga",
+    "genres": [
+      "comedy",
+      "drama",
+      "music",
+      "romance",
+      "slice of life"
+    ],
+    "mood": "nostalgic",
+    "cover": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx30145-ipNuwNgD5AJS.png"
   }
 ]

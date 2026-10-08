@@ -3,6 +3,7 @@ let currentMood = null;
 let currentSearch = '';
 const sfxWords = ['ドン', 'バン', 'ゴゴゴ', 'ドキドキ', 'キラ', 'ズキューン', 'シーン', 'ビリビリ', 'ドサッ', 'ガーン'];
 let currentPageNum = 1;
+const defaultNotes = document.getElementById('notesContent').innerHTML;
 function addManga() {
   const title = document.getElementById('newTitle').value;
   const mood = document.getElementById('newMood').value;
@@ -131,8 +132,8 @@ function displayResults(items) {
     <p><strong>Genres:</strong> ${item.genres.join(', ')}</p>
     <p><strong>Mood:</strong> ${item.mood}</p>
   `;
-  resultsDiv.appendChild(panel);
-
+  resultsDiv.appendChild(panel); 
+  panel.addEventListener('click', () => showDetails(item));
   fetch(`/cover?title=${encodeURIComponent(item.title)}`)
     .then(res => res.json())
     .then(data => {
@@ -154,4 +155,79 @@ function displayPagination(current, total) {
 
   prevBtn.disabled = current <= 1;
   nextBtn.disabled = current >= total;
+}
+function getRandom() {
+  let url = '/random?';
+
+  if (currentGenre) {
+    url += `genre=${currentGenre}&`;
+  }
+
+  if (currentMood) {
+    url += `mood=${currentMood}`;
+  }
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (!data.item) {
+        displayResults([]);
+      } else {
+        displayResults([data.item]);
+      }
+      displayPagination(1, 1);
+    });
+}
+function addNote(parent, label, value) {
+  const p = document.createElement('p');
+  p.className = 'fun-fact';
+
+  const strong = document.createElement('strong');
+  strong.textContent = label + ': ';
+
+  p.appendChild(strong);
+  p.appendChild(document.createTextNode(value));
+  parent.appendChild(p);
+}
+
+function resetNotes() {
+  document.getElementById('notesContent').innerHTML = defaultNotes;
+}
+
+function showDetails(item) {
+  const notes = document.getElementById('notesContent');
+  notes.innerHTML = '<p class="fun-fact">Loading details...</p>';
+
+  fetch(`/details?title=${encodeURIComponent(item.title)}`)
+    .then(res => res.json())
+    .then(data => {
+      notes.innerHTML = '';
+
+      const heading = document.createElement('h3');
+      heading.textContent = item.title;
+      notes.appendChild(heading);
+
+      const d = data.details;
+
+      if (!d) {
+        addNote(notes, 'Details', 'Not available right now.');
+      } else {
+        if (d.author) addNote(notes, 'Author', d.author);
+        if (d.year) addNote(notes, 'Started', d.year);
+        if (d.status) addNote(notes, 'Status', d.status);
+        if (d.chapters) addNote(notes, 'Chapters', d.chapters);
+        if (d.volumes) addNote(notes, 'Volumes', d.volumes);
+        if (d.score) addNote(notes, 'Score', `${d.score}/100`);
+        if (d.synopsis) addNote(notes, 'Synopsis', d.synopsis);
+      }
+
+      const backBtn = document.createElement('button');
+      backBtn.className = 'nav-btn';
+      backBtn.textContent = 'Back to notes';
+      backBtn.onclick = resetNotes;
+      notes.appendChild(backBtn);
+    })
+    .catch(() => {
+      notes.innerHTML = '<p class="fun-fact">Could not load details.</p>';
+    });
 }
