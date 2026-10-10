@@ -1,5 +1,10 @@
 
 const express = require('express');
+require('dotenv').config();
+const { MongoClient } = require('mongodb');
+
+const client = new MongoClient(process.env.MONGODB_URI);
+let mangaCollection;
 const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -55,19 +60,15 @@ app.get('/cover', async (req, res) => {
 app.use(express.static('public'));
 app.use(express.json());
 
-function loadItems() {
-  const raw =fs.readFileSync('./data.json','utf-8');
-  return JSON.parse(raw);
-}
-function saveItems(items) {
-  fs.writeFileSync('./data.json',JSON.stringify(items,null,2));
+async function loadItems() {
+  return await mangaCollection.find({}, { projection: { _id: 0 } }).toArray();
 }
 
 app.get('/', (req, res) => {
   res.send('Hello from your manga site server!');
 });
-app.get('/recommendations', (req, res) => {
-  const items = loadItems();
+app.get('/recommendations', async(req, res) => {
+  const items = await loadItems();
   const { genre, mood, search, page } = req.query;
   let results = items;
 
@@ -91,60 +92,12 @@ app.get('/recommendations', (req, res) => {
   res.json({ results: paginatedResults, totalresults, totalPages, currentPage });
 });
 
-app.post('/add-manga', async (req, res) => {
-  const { title, mood} = req.body;
-
-  if (!title || !mood) {
-    return res.status(400).json({ error : 'title and mood are required'});
-  }
-  const query = `
-  query ($search: String) {
-    Media(search: $search, type: MANGA) {
-      genres
-      coverImage {
-        large
-      }
-    }
-  }
-`;
-try {
-    const response = await fetch('https://graphql.anilist.co', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ query, variables: { search: title } })
-    });
-
-    const data = await response.json();
-    const media = data.data?.Media;
-
-    if (!media) {
-      return res.status(404).json({ error: 'Manga not found on AniList' });
-    }
-
-    const newEntry = {
-      title: title,
-      type: 'manga',
-      genres: media.genres.map(g => g.toLowerCase()),
-      mood: mood,
-      cover: media.coverImage?.large || null
-    };
-
-    const items = loadItems();
-    items.push(newEntry);
-    saveItems(items);
-
-    res.json({ success: true, entry: newEntry });
-
-  } catch (err) {
-    console.error('Add manga failed:', err.message);
-    res.status(500).json({ error: 'Something went wrong' });
-  }
+app.post('/add-manga', (req, res) => {
+  res.status(403).json({ error: 'Adding is paused while suggestions are being set up' });
 });
-app.get('/random', (req, res) => {
-  const items = loadItems();
+
+app.get('/random',  async (req, res) => {
+  const items = await loadItems();
   const { genre, mood } = req.query;
 
   let results = items;
@@ -239,6 +192,18 @@ app.get('/details', async (req, res) => {
     res.json({ details: null });
   }
 });
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+async function start() {
+  await client.connect();
+  mangaCollection = client.db('mangasite').collection('manga');
+  console.log('Connected to MongoDB');
+
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+}
+
+start().catch(err => {
+  console.error('Startup failed:', err.message);
+  process.exit(1);
 });
+
