@@ -264,4 +264,61 @@ h1 {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0px rgba(255,255,255,0.2);
 }
+@media (max-width: 800px) {
+  body {
+    padding: 10px;
+  }
 
+  .page-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .manga-panel {
+    order: 1;
+    aspect-ratio: auto;
+    overflow-y: visible;
+    padding: 15px;
+  }
+
+  .notes-panel {
+    order: 2;
+  }
+
+  .nav-panel {
+    order: 3;
+  }
+
+  .side-panel {
+    position: static;
+  }
+
+  .notes-panel,
+  .nav-panel {
+    max-height: none;
+  }
+
+  .manga-panel,
+  .side-panel {
+    filter: drop-shadow(4px 4px 0px rgba(255,255,255,0.15));
+  }
+
+  .panel {
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .panel .cover {
+    max-height: 300px;
+  }
+
+  .filter-group button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}

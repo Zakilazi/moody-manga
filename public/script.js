@@ -195,6 +195,7 @@ function resetNotes() {
 }
 
 function showDetails(item) {
+  document.getElementById('notesContent').scrollIntoView({ behavior: 'smooth' });
   const notes = document.getElementById('notesContent');
   notes.innerHTML = '<p class="fun-fact">Loading details...</p>';
 
